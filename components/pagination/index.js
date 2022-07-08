@@ -1,5 +1,7 @@
 import { useState } from "react";
 import styles from './pagination.module.css'
+import PropTypes from "prop-types";
+import Button from "Components/button";
 
 export default function Pagination({ fetchPage, curPage }) {
     const [currentPage, setCurrentPage] = useState(curPage);
@@ -17,29 +19,33 @@ export default function Pagination({ fetchPage, curPage }) {
       }
   
       return (
-        <div>
-          {/* show the pagiantion
-              it consists of next and previous buttons
-              along with page numbers, in our case, 5 page
-              numbers at a time
-          */}
-          <div className={styles.pagination + ' my-5'}>
+        <>
             {/* previous button */}
-            <button
+            <Button
               onClick={goToPreviousPage}
-              className={`${styles.prev} ${currentPage === 1 ? styles.prev.disabled : ''}`}
+              active={currentPage === 1 ? false : true}
+              margin="5px"
             >
               prev
-            </button>
+            </Button>
       
             {/* next button */}
-            <button
+            <Button
               onClick={goToNextPage}
-              className={`${styles.next}`}
+              active
             >
               next
-            </button>
-          </div>
-        </div>
+            </Button>
+        </>
       );
   }
+
+  Pagination.propTypes = {
+    fetchPage: PropTypes.func.isRequired,
+    curPage: PropTypes.number,
+  };
+
+  Pagination.defaultProps = {
+    fetchPage: () => false,
+    curPage: 1,
+  };

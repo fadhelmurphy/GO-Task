@@ -2,6 +2,9 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Pagination from "Components/pagination";
+import { AppstoreOutlined,BarsOutlined } from "@ant-design/icons";
+import Button from "Components/button";
+import Head from "next/head";
 
 const photos = ({ query }) => {
   const router = useRouter();
@@ -29,10 +32,17 @@ const photos = ({ query }) => {
 
   return (
     <>
+    <Head>
+      <title>Photos</title>
+      <link rel="icon" href="/favicon.ico" />
+    </Head>
       <div className="layout-container">
-            <button onClick={()=>setList(!list)}>
-              View
-            </button>
+        <h1>Images container</h1>
+        {/* Flexible grid */}
+        <Button margin="2px" active={!list} onClick={() => setList(false)}><AppstoreOutlined /></Button>
+        {/* Column list */}
+        <Button margin="0 20px 0 0" active={list} onClick={() => setList(true)}><BarsOutlined /></Button>
+        <Pagination fetchPage={(val) => setPage(val)} curPage={page} />
         {!data ? (
           <h1>Loading...</h1>
         ) : (
@@ -42,12 +52,19 @@ const photos = ({ query }) => {
                 data.map((item) => (
                   <>
                     <div className="card">
-                      <img src={item?.download_url} />
+                      <div className="image">
+                        <img src={item?.download_url} />
+                      </div>
+                      <span className="text">
+                        <p>{item?.author}</p>
+                        <a href={item?.download_url}>
+                        <Button>Download</Button>
+                        </a>
+                      </span>
                     </div>
                   </>
                 ))}
             </div>
-            <Pagination fetchPage={(val) => setPage(val)} curPage={page} />
           </>
         )}
       </div>
@@ -58,19 +75,32 @@ const photos = ({ query }) => {
             margin: 0 auto 30px;
             max-width: 935px;
           }
+          .layout-container h1 {
+            font-weight: 400;
+            font-size: 3rem;
+            text-align: center;
+          }
           .list {
             display: grid;
-            grid-template-columns: repeat(${list? "1" : "3"}, 1fr);
+            grid-template-columns: repeat(${list ? `4` : `3`}, 1fr);
             grid-gap: 28px;
           }
           .card {
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            height: 293px;
+            column-count: ${list ? `2` : `1`};
+            ${list && `display: contents;`}
             position: relative;
           }
-          .card img {
+          .card div.image {
+            position: relative;
+            overflow: hidden;
+            height: ${list ? `150px` : `293px`};
+            width: ${list ? `150px` : `293px`};
+            position: relative;
+          }
+          .card span.text {
+            align-self: center;
+          }
+          .card div img {
             position: absolute;
             inset: 0px;
             box-sizing: border-box;
