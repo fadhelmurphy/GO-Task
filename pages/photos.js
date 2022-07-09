@@ -34,7 +34,7 @@ const photos = ({ query }) => {
     try {
       setData(false);
       const res = await fetch(
-        `https://picsum.photos/v2/list?page=${page}&limit=10`
+        `/api/photos?page=${page}&limit=10`
       );
       const data = await res.json();
       setData(data);
@@ -67,9 +67,9 @@ const photos = ({ query }) => {
           <>
             <div className="list">
               {data?.length > 0 &&
-                data.map((item) => (
+                data.map((item, idx) => (
                   <>
-                    <Card {...item} list={list} />
+                    <Card key={String(idx)} {...item} list={list} />
                   </>
                 ))}
             </div>
@@ -78,11 +78,6 @@ const photos = ({ query }) => {
       </div>
       <style jsx="true">
         {`
-          .layout-container {
-            flex-grow: 1;
-            margin: 0 auto 30px;
-            max-width: 935px;
-          }
           .layout-container h1 {
             font-weight: 400;
             font-size: 3rem;
@@ -90,8 +85,15 @@ const photos = ({ query }) => {
           }
           .list {
             display: grid;
-            grid-template-columns: repeat(${list ? `4` : `3`}, 1fr);
-            grid-gap: 28px;
+            grid-template-columns: repeat(${list ? `4` : `2`}, 1fr);
+            grid-gap: 14px;
+          }
+          /* Medium devices (landscape tablets, 768px and up) */
+          @media only screen and (min-width: 768px) {
+            .list {
+              grid-template-columns: repeat(${list ? `4` : `3`}, 1fr);
+              grid-gap: 28px;
+            }
           }
         `}
       </style>

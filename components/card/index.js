@@ -17,7 +17,7 @@ const Card = (item) => {
         </a>
       </span>
     </div>
-    <style>
+    <style jsx>
         {`
         
         .card {

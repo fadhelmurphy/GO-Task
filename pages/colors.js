@@ -1,16 +1,20 @@
-import {DEFAULT_COLOR, DEFAULT_COLORS} from "Consts/data"
-import { parseColor } from "Helpers/utils";
-import { useMemo } from "react";
+import ParentRect from "Components/parent-rect";
+import Head from "next/head";
+import React from "react";
 
-export const ColorPicker = ({ color, colors, onChange, variant }) => {
-
-    const parsedColor = useMemo(() => parseColor(color), [color]);
+export default function Colors() {
+  return (
+    <>
+    <Head>
+      <title>Color Picker</title>
+      <link rel="icon" href="/favicon.ico" />
+    </Head>
+    <div className="layout-container" style={{maxWidth: "80vw"}}>
+        <h1>Simple Color Picker</h1>
+      {Array.from({ length: 8 }, (_, idx) => (
+        <ParentRect idx={idx} />
+      ))}
+    </div>
+    </>
+  );
 }
-
-ColorPicker.defaultProps = {
-    color: DEFAULT_COLOR,
-    colors: DEFAULT_COLORS,
-    onChange: () => {},
-    variant: "predefined"
-  };
-  

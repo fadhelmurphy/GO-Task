@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 export default function Button({type, active, children, onClick, margin, padding, className}) {
     return (
         <>
-        <button type={type.toString()} className={`customButton ${className}`} onClick={(val)=>onClick(val)}>{children}</button>
-        <style jsx="true">
+        <button type={type} className={`customButton ${className}`} onClick={(val)=>onClick(val)}>{children}</button>
+        <style jsx>
             {`
                 .customButton {
                     color: ${active ? "#4CAF50" : "#999"};
@@ -30,6 +30,7 @@ Button.propTypes = {
     active: PropTypes.bool,
     type: PropTypes.any,
     children: PropTypes.any,
+    className: PropTypes.string,
   };
 
   Button.defaultProps = {
@@ -39,4 +40,5 @@ Button.propTypes = {
     padding: "10px",
     active: false,
     type: false,
+    className: "",
   };
