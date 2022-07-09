@@ -76,7 +76,7 @@ const photos = ({ query }) => {
           </>
         )}
       </div>
-      <style jsx>
+      <style jsx="true">
         {`
           .layout-container {
             flex-grow: 1;

@@ -1,7 +1,7 @@
 import numToWords from "Functions/numToWords";
 import dynamic from "next/dynamic";
 import Head from "next/head";
-import { useState } from "react";
+import React, { useState } from "react";
 const Button = dynamic(
 	() => import("Components/button"),
 	{
@@ -49,7 +49,7 @@ export default function Home() {
         </form>
         <h1>{input.result}</h1>
       </div>
-      <style jsx>
+      <style jsx="true">
         {`
           .layout-container {
             flex-grow: 1;

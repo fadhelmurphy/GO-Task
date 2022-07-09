@@ -2,6 +2,7 @@
 /* eslint-disable react/require-default-props */
 /* eslint-disable react/forbid-prop-types */
 import PropTypes from "prop-types";
+import React from "react";
 
 const Input = ({
 	value,
@@ -18,7 +19,7 @@ const Input = ({
 		}
 		<input value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder} required />
 		{validation && <p className="error">{`${label} must be filled`}</p>}
-		<style jsx>
+		<style jsx="true">
 			{`
 				.form-input {
 					padding: 0 0 10px 0;
