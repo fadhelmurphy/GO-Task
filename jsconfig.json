@@ -4,7 +4,7 @@
 		"paths": {
 			"Consts/*": ["./consts/*"],
       		"Components/*": ["./components/*"],
-      		"Functions/*": ["./function/*"],
+      		"Functions/*": ["./functions/*"],
 			"Helpers/*": ["./helpers/*"],
 		}
 	}
