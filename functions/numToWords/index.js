@@ -86,4 +86,4 @@ const numToWords = (n) => {
       .join(" ").trim();
 };
 
-module.exports = {numToWords}
+module.exports = numToWords

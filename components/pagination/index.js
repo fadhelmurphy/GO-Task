@@ -1,5 +1,4 @@
-import { useState } from "react";
-import styles from './pagination.module.css'
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Button from "Components/button";
 

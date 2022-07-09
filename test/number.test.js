@@ -1,4 +1,4 @@
-const { numToWords } = require("../functions/numToWords");
+const numToWords = require("../functions/numToWords");
 
 test('expect : thirty million ninety one thousand eight hundred ninety five', () => {
     expect(numToWords("30091895")).toBe('thirty million ninety one thousand eight hundred ninety five')

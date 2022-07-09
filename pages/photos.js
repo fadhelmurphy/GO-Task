@@ -1,10 +1,28 @@
 /* eslint-disable react-hooks/rules-of-hooks */
+import React from "react";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import Pagination from "Components/pagination";
 import { AppstoreOutlined,BarsOutlined } from "@ant-design/icons";
-import Button from "Components/button";
+import dynamic from "next/dynamic";
 import Head from "next/head";
+const Button = dynamic(
+	() => import("Components/button"),
+	{
+		ssr: false,
+	},
+);
+const Pagination = dynamic(
+	() => import("Components/pagination"),
+	{
+		ssr: false,
+	},
+);
+const Card = dynamic(
+	() => import("Components/card"),
+	{
+		ssr: true,
+	},
+);
 
 const photos = ({ query }) => {
   const router = useRouter();
@@ -51,17 +69,7 @@ const photos = ({ query }) => {
               {data?.length > 0 &&
                 data.map((item) => (
                   <>
-                    <div className="card">
-                      <div className="image">
-                        <img src={item?.download_url} />
-                      </div>
-                      <span className="text">
-                        <p>{item?.author}</p>
-                        <a href={item?.download_url}>
-                        <Button>Download</Button>
-                        </a>
-                      </span>
-                    </div>
+                    <Card {...item} list={list} />
                   </>
                 ))}
             </div>
@@ -84,37 +92,6 @@ const photos = ({ query }) => {
             display: grid;
             grid-template-columns: repeat(${list ? `4` : `3`}, 1fr);
             grid-gap: 28px;
-          }
-          .card {
-            column-count: ${list ? `2` : `1`};
-            ${list && `display: contents;`}
-            position: relative;
-          }
-          .card div.image {
-            position: relative;
-            overflow: hidden;
-            height: ${list ? `150px` : `293px`};
-            width: ${list ? `150px` : `293px`};
-            position: relative;
-          }
-          .card span.text {
-            align-self: center;
-          }
-          .card div img {
-            position: absolute;
-            inset: 0px;
-            box-sizing: border-box;
-            padding: 0px;
-            border: none;
-            margin: auto;
-            display: block;
-            width: 0px;
-            height: 0px;
-            min-width: 100%;
-            max-width: 100%;
-            min-height: 100%;
-            max-height: 100%;
-            object-fit: cover;
           }
         `}
       </style>

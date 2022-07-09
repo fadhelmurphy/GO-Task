@@ -1,9 +1,10 @@
+import React from "react";
 import PropTypes from "prop-types";
-export default function customButton({type, active, children, onClick, margin, padding, className}) {
+export default function Button({type, active, children, onClick, margin, padding, className}) {
     return (
         <>
-        <button type={type} className={`customButton ${className}`} onClick={(val)=>onClick(val)}>{children}</button>
-        <style jsx>
+        <button type={type.toString()} className={`customButton ${className}`} onClick={(val)=>onClick(val)}>{children}</button>
+        <style jsx="true">
             {`
                 .customButton {
                     color: ${active ? "#4CAF50" : "#999"};
@@ -22,15 +23,16 @@ export default function customButton({type, active, children, onClick, margin, p
         </>
     )
 }
-customButton.propTypes = {
+Button.propTypes = {
     onClick: PropTypes.func,
     icon: PropTypes.any,
     margin: PropTypes.string,
     active: PropTypes.bool,
     type: PropTypes.any,
+    children: PropTypes.any,
   };
 
-  customButton.defaultProps = {
+  Button.defaultProps = {
     onClick: () => false,
     children: null,
     margin: "10px 10px 10px 0",

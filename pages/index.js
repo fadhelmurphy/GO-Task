@@ -1,8 +1,19 @@
-import Button from "Components/button";
-import Input from "Components/input";
-import { numToWords } from "Functions/numToWords";
+import numToWords from "Functions/numToWords";
+import dynamic from "next/dynamic";
 import Head from "next/head";
 import { useState } from "react";
+const Button = dynamic(
+	() => import("Components/button"),
+	{
+		ssr: false,
+	},
+);
+const Input = dynamic(
+	() => import("Components/input"),
+	{
+		ssr: false,
+	},
+);
 
 export default function Home() {
   const [input, setInput] = useState({

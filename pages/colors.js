@@ -1,7 +1,10 @@
 import {DEFAULT_COLOR, DEFAULT_COLORS} from "Consts/data"
+import { parseColor } from "Helpers/utils";
+import { useMemo } from "react";
 
-export const ColorPicker = () => {
+export const ColorPicker = ({ color, colors, onChange, variant }) => {
 
+    const parsedColor = useMemo(() => parseColor(color), [color]);
 }
 
 ColorPicker.defaultProps = {
