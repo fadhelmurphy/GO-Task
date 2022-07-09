@@ -1,13 +1,13 @@
 import Button from "Components/button";
 import Input from "Components/input";
-import numToWords from "Functions/numToWords";
+import { numToWords } from "Functions/numToWords";
 import Head from "next/head";
 import { useState } from "react";
 
 export default function Home() {
   const [input, setInput] = useState({
     number: 0,
-    result: 0,
+    result: "",
   });
 
   const onSubmit = (event) => {

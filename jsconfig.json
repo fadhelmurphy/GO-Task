@@ -2,8 +2,10 @@
 	"compilerOptions": {
 		"baseUrl": ".",
 		"paths": {
+			"Consts/*": ["./consts/*"],
       		"Components/*": ["./components/*"],
-      		"Functions/*": ["./function/*"]
+      		"Functions/*": ["./function/*"],
+			"Helpers/*": ["./helpers/*"],
 		}
 	}
 }
