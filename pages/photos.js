@@ -2,27 +2,19 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { AppstoreOutlined,BarsOutlined } from "@ant-design/icons";
+import { AppstoreOutlined, BarsOutlined } from "@ant-design/icons";
 import dynamic from "next/dynamic";
 import Head from "next/head";
-const Button = dynamic(
-	() => import("Components/button"),
-	{
-		ssr: false,
-	},
-);
-const Pagination = dynamic(
-	() => import("Components/pagination"),
-	{
-		ssr: false,
-	},
-);
-const Card = dynamic(
-	() => import("Components/card"),
-	{
-		ssr: true,
-	},
-);
+import Link from "next/link";
+const Button = dynamic(() => import("Components/button"), {
+  ssr: false,
+});
+const Pagination = dynamic(() => import("Components/pagination"), {
+  ssr: false,
+});
+const Card = dynamic(() => import("Components/card"), {
+  ssr: false,
+});
 
 const photos = ({ query }) => {
   const router = useRouter();
@@ -33,9 +25,7 @@ const photos = ({ query }) => {
   const handleFetching = async ({ page = 1 }) => {
     try {
       setData(false);
-      const res = await fetch(
-        `/api/photos?page=${page}&limit=10`
-      );
+      const res = await fetch(`/api/photos?page=${page}&limit=10`);
       const data = await res.json();
       setData(data);
       router.push(`photos?page=${page}`, undefined, { shallow: true });
@@ -50,17 +40,37 @@ const photos = ({ query }) => {
 
   return (
     <>
-    <Head>
-      <title>Photos</title>
-      <link rel="icon" href="/favicon.ico" />
-    </Head>
+      <Head>
+        <title>Photos</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <div className="layout-container">
         <h1>Images container</h1>
-        {/* Flexible grid */}
-        <Button margin="2px" active={!list} onClick={() => setList(false)}><AppstoreOutlined /></Button>
-        {/* Column list */}
-        <Button margin="0 20px 0 0" active={list} onClick={() => setList(true)}><BarsOutlined /></Button>
-        <Pagination fetchPage={(val) => setPage(val)} curPage={page} />
+        <div className="button-control">
+          <div className="left-button">
+            {/* Flexible grid */}
+            <Button margin="2px" active={!list} onClick={() => setList(false)}>
+              <AppstoreOutlined />
+            </Button>
+            {/* Column list */}
+            <Button
+              margin="0 20px 0 0"
+              active={list}
+              onClick={() => setList(true)}
+            >
+              <BarsOutlined />
+            </Button>
+            <Pagination fetchPage={(val) => setPage(val)} curPage={page} />
+          </div>
+          <div className="right-button">
+            <Link href="/">
+              <Button active>Prev Task</Button>
+            </Link>
+            <Link href="/number">
+              <Button active>Next Task</Button>
+            </Link>
+          </div>
+        </div>
         {!data ? (
           <h1>Loading...</h1>
         ) : (
@@ -82,6 +92,13 @@ const photos = ({ query }) => {
             font-weight: 400;
             font-size: 3rem;
             text-align: center;
+          }
+          .layout-container .button-control {
+            display: flex;
+            justify-content: space-between;
+          }
+          .layout-container .button-control div{
+            display: flex;
           }
           .list {
             display: grid;

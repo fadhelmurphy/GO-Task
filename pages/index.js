@@ -1,6 +1,14 @@
 import ParentRect from "Components/parent-rect";
+import dynamic from "next/dynamic";
 import Head from "next/head";
+import Link from "next/link";
 import React from "react";
+const Button = dynamic(
+	() => import("Components/button"),
+	{
+		ssr: false,
+	},
+);
 
 export default function Colors() {
   return (
@@ -14,6 +22,9 @@ export default function Colors() {
       {Array.from({ length: 8 }, (_, idx) => (
         <ParentRect idx={idx} />
       ))}
+      <Link href="/photos">
+        <Button active>Next Task</Button>
+      </Link>
     </div>
     </>
   );

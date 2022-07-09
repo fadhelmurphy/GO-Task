@@ -1,6 +1,7 @@
 import numToWords from "Functions/numToWords";
 import dynamic from "next/dynamic";
 import Head from "next/head";
+import Link from "next/link";
 import React, { useState } from "react";
 const Button = dynamic(
 	() => import("Components/button"),
@@ -48,6 +49,9 @@ export default function Home() {
           </Button>
         </form>
         <h1>{input.result}</h1>
+        <Link href="/photos">
+          <Button active>Prev Task</Button>
+        </Link>
       </div>
       <style jsx="true">
         {`
